@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>اختبار الصوت والأسئلة</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+    .left, .right {
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .left {
+      width: 50%;
+      background-color: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .right {
+      width: 50%;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .controls button {
+      padding: 5px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #questions {
+      flex: 1;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      font-size: 16px;
+      transition: font-size 0.2s;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+    .incorrect {
+      color: red;
+      font-weight: bold;
+    }
+    #result {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="left">
+    <audio id="audio" controls>
+      <source src="audio.mp3" type="audio/mpeg" />
+      المتصفح الخاص بك لا يدعم تشغيل الصوت.
+    </audio>
+  </div>
+
+  <div class="right">
+    <div class="controls">
+      <button onclick="zoomIn()">A+</button>
+      <button onclick="zoomOut()">A−</button>
+    </div>
+    <div id="questions">
+      <div class="question" data-correct="2">
+        1. ما هو موضوع الصوت؟<br/>
+        <div class="options">
+          <label><input type="radio" name="q1" value="1" /> موضوع السفر</label>
+          <label><input type="radio" name="q1" value="2" /> موضوع التعليم</label>
+          <label><input type="radio" name="q1" value="3" /> موضوع الطعام</label>
+        </div>
+      </div>
+      <div class="question" data-correct="1">
+        2. من يتحدث في الصوت؟<br/>
+        <div class="options">
+          <label><input type="radio" name="q2" value="1" /> الأستاذ</label>
+          <label><input type="radio" name="q2" value="2" /> الطالب</label>
+          <label><input type="radio" name="q2" value="3" /> الطبيب</label>
+        </div>
+      </div>
+      <div class="question" data-correct="3">
+        3. ما هو الفكرة الرئيسية؟<br/>
+        <div class="options">
+          <label><input type="radio" name="q3" value="1" /> الترفيه</label>
+          <label><input type="radio" name="q3" value="2" /> الرياضة</label>
+          <label><input type="radio" name="q3" value="3" /> التعليم</label>
+        </div>
+      </div>
+      <div class="question" data-correct="2">
+        4. كم عدد النقاط الرئيسية التي تم ذكرها؟<br/>
+        <div class="options">
+          <label><input type="radio" name="q4" value="1" /> واحدة</label>
+          <label><input type="radio" name="q4" value="2" /> اثنتان</label>
+          <label><input type="radio" name="q4" value="3" /> ثلاث</label>
+        </div>
+      </div>
+      <div class="question" data-correct="3">
+        5. ما هو انطباعك عن الصوت؟<br/>
+        <div class="options">
+          <label><input type="radio" name="q5" value="1" /> ممل</label>
+          <label><input type="radio" name="q5" value="2" /> عادي</label>
+          <label><input type="radio" name="q5" value="3" /> ممتع</label>
+        </div>
+      </div>
+    </div>
+    <button onclick="checkAnswers()" style="margin-top: 10px; padding: 10px; font-size: 16px;">عرض النتيجة</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    let fontSize = 16;
+    const questionsDiv = document.getElementById("questions");
+    const resultDiv = document.getElementById("result");
+
+    function zoomIn() {
+      fontSize += 2;
+      questionsDiv.style.fontSize = fontSize + "px";
+    }
+function zoomOut() {
+      if (fontSize > 10) {
+        fontSize -= 2;
+        questionsDiv.style.fontSize = fontSize + "px";
+      }
+    }
+
+    function checkAnswers() {
+      const questions = document.querySelectorAll(".question");
+      let correctCount = 0;
+      let feedback = '';
+
+      questions.forEach((q, index) => {
+        const correctAnswer = q.getAttribute("data-correct");
+        const options = q.querySelectorAll("input[type=radio]");
+        let userAnswer = null;
+
+        options.forEach(opt => {
+          if (opt.checked) userAnswer = opt.value;
+        });
+
+        // Clear old classes
+        q.classList.remove("correct");
+        q.classList.remove("incorrect");
+
+        if (userAnswer === correctAnswer) {
+          correctCount++;
+          q.classList.add("correct");
+          feedback += السؤال ${index + 1}: إجابة صحيحة<br/>;
+        } else {
+          q.classList.add("incorrect");
+          feedback += السؤال ${index + 1}: إجابة خاطئة (الصحيح: الخيار ${correctAnswer})<br/>;
+        }
+      });
+
+      resultDiv.innerHTML = نتيجتك: ${correctCount} من 5<br/><br/> + feedback;
+    }
+  </script>
+
+</body>
+</html>
