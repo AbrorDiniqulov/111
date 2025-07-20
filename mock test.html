@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 ta Topshiriqli Test</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+  body { font-family: sans-serif; }
+  .box-word {
+  cursor: pointer;
+  padding: 10px 16px;
+  margin: 6px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9fafb;
+  display: inline-block;
+  font-size: 15px; /* Font kattaligi oshirildi */
+  font-family: "Amiri", "Scheherazade", "Times new roman", sans-serif; /* Arabcha fontlar qo‘shildi */
+  direction: rtl; /* Arabcha yo‘nalishda yozilishi uchun */
+  text-align: center;
+}
+<link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    .arabic-text {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+      font-size: 1.5rem; /* yoki text-xl */
+      line-height: 2.2rem;
+      color: #1f2937; /* dark-gray */
+      text-align: right;
+      margin-bottom: 1.5rem;
+    }
+.box-word.selected {
+  background-color: #cce5ff;
+  border-color: #66b0ff;
+  }
+  .drop-zone {
+    min-width: 80px;
+    min-height: 30px;
+    display: inline-block;
+    border-bottom: 2px solid #333;
+    margin: 0 4px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .task-container { display: none; }
+  .task-container.active { display: block; }
+
+  /* ✅ Yangi qo‘shilganlar */
+  select {
+    position: relative;
+    z-index: 10;
+    margin-bottom: 12px;
+  }
+  p {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+
+  <div id="timer" class="text-right text-lg font-semibold mb-4">Qolgan vaqt: <span id="time">60:00</span></div>
+
+  <!-- 1-topshiriq -->
+  <div id="task1" class="task-container active">
+    <h2 class="text-xl font-bold mb-2">1-topshiriq: Tushib qolgan so'zlarni joylashtiring</h2>
+    <div class="mb-2 text-sm text-gray-700">(2ta ortiqcha so‘z bor)</div>
+    <div id="task1-words" class="mb-4 flex flex-wrap"></div>
+    <div class="space-y-4">
+      <p>1. تعتبر العائلة من أهم النعم التي أنعم الله بها على الإنسان. فهي المكان الذي يجد فيه الإنسان الحب والدعم والرعاية. <span class="drop-zone" data-answer="تبدأ"></span> العائلة من الوالدين ثم تتسع لتشمل الأبناء والأقارب. في العائلة يتعلم الإنسان القيم والمبادئ التي تساعده في حياته اليومية.
+
+تجمع العائلة أفرادها في الأوقات السعيدة والحزينة، فتقوي الروابط بينهم. كما تلعب العائلة دورًا كبيرًا في تربية الأطفال وتعليمهم السلوك الصحيح. يجب <span class="drop-zone" data-answer="على"></span> الوالدين أن يكونا قدوة لأبنائهم في الصدق والأمانة والعمل الجاد.
+
+تختلف أنواع العائلات بين كبيرة وصغيرة، ولكن جميعها <span class="drop-zone" data-answer="تقوم"></span> على المحبة والاحترام المتبادل. كما أن العائلة توفر للأفراد الأمان النفسي والعاطفي، مما يساعدهم على مواجهة تحديات الحياة.
+
+في بعض الأحيان تواجه العائلة صعوبات ومشاكل، ولكن الحوار والتفاهم يساعدان على حلها. <span class="drop-zone" data-answer="إن"></span> التواصل الجيد بين أفراد العائلة يجعلها أكثر تماسكًا وقوة.
+
+من المهم أن يقضي أفراد العائلة <span class="drop-zone" data-answer="وقتا"></span> معًا، مثل تناول الطعام أو ممارسة الأنشطة الترفيهية، لأن ذلك يعزز المحبة والتفاهم بينهم. كما يجب دعم بعضهم البعض في الأوقات الصعبة.
+
+باختصار، العائلة <span class="drop-zone" data-answer="هي"></span> الركيزة التي يبني عليها الإنسان حياته، ويجب المحافظة عليها ورعايتها لأنها أثمن ما يملك الإنسان.</p>
+    </div>
+  </div>
+
+  <!-- 2-topshiriq -->
+  <div id="task2" class="task-container">
+    <h2 class="text-xl font-bold mb-2">2-topshiriq: E'lon sarlavhalarini toping</h2>
+    <div class="mb-2 text-sm text-gray-700">(2ta ortiqcha sarlavha bor)</div>
+    <div id="task2-headlines" class="mb-4 flex flex-wrap"></div>
+    <div class="space-y-4">
+      <!-- 1 -->
+<p>في أوقاتٍ كثيرة نشعرُ بأن الحياة مليئةٌ بالتحديات. نحتاج إلى لحظاتٍ من الهدوء والتأمل، حيث نتمكن من إعادة ترتيب أفكارنا وأهدافنا. قد تأتي فرصةٌ جديدةٌ تحملُ معها تغييرًا جذريًا في مسارنا. لا تخف من المجهول، فالمستقبل يحمل دائمًا أملًا جديدًا وأبوابًا مفتوحة.</p>
+<select class="select-task2" data-answer="سَرْبُ الأماني">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="رحلة بلا نهاية">رحلة بلا نهاية</option>
+  <option value="ظلال الأحلام">ظلال الأحلام</option>
+  <option value="سَرْبُ الأماني">سَرْبُ الأماني</option>
+  <option value="ضوء في الظلام">ضوء في الظلام</option>
+  <option value="رسالة من بعيد">رسالة من بعيد</option>
+  <option value="نبض المستقبل">نبض المستقبل</option>
+  <option value="ألحان الصمت">ألحان الصمت</option>
+  <option value="همسات الحياة">همسات الحياة</option>
+  <option value="صدى الماضي">صدى الماضي</option>
+  <option value="بوابة الفرص">بوابة الفرص</option>
+</select>
+
+<!-- 2 -->
+<p>حين نبدأ خطواتنا في دربٍ مجهول، نحمل معنا ثقل التجارب السابقة. لكن كل تجربة تضيف لونًا جديدًا إلى حياتنا. لا تتردد في استكشاف المجهول، فكل لحظة تحمل فرصة للتعلم والنمو. قد تجد في الطريق أصدقاء جددًا أو مواقف تعلّمك دروسًا لا تُنسى.</p>
+<select class="select-task2" data-answer="رحلة بلا نهاية">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="همسات الحياة">همسات الحياة</option>
+  <option value="ظلال الأحلام">ظلال الأحلام</option>
+  <option value="نبض المستقبل">نبض المستقبل</option>
+  <option value="رحلة بلا نهاية">رحلة بلا نهاية</option>
+  <option value="صدى الماضي">صدى الماضي</option>
+  <option value="ألحان الصمت">ألحان الصمت</option>
+  <option value="بوابة الفرص">بوابة الفرص</option>
+  <option value="رسالة من بعيد">رسالة من بعيد</option>
+  <option value="سَرْبُ الأماني">سَرْبُ الأماني</option>
+  <option value="ضوء في الظلام">ضوء في الظلام</option>
+</select>
+
+<!-- 3 -->
+<p>تتغير الأحوال باستمرار، وقد تظهر أمامك أبواب لم تكن متوقعة. لا تغلق بابًا قبل أن تتأكد من فرصته. في بعض الأحيان، تكمن القوة في التجديد والتغيير. كن مستعدًا لاستقبال الجديد، فهو قد يحمل لك النجاح الذي لطالما حلمت به.</p>
+<select class="select-task2" data-answer="بوابة الفرص">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="صدى الماضي">صدى الماضي</option>
+  <option value="ظلال الأحلام">ظلال الأحلام</option>
+  <option value="رسالة من بعيد">رسالة من بعيد</option>
+  <option value="بوابة الفرص">بوابة الفرص</option>
+  <option value="سَرْبُ الأماني">سَرْبُ الأماني</option>
+  <option value="رحلة بلا نهاية">رحلة بلا نهاية</option>
+  <option value="ألحان الصمت">ألحان الصمت</option>
+  <option value="ضوء في الظلام">ضوء في الظلام</option>
+  <option value="نبض المستقبل">نبض المستقبل</option>
+  <option value="همسات الحياة">همسات الحياة</option>
+</select>
+
+<!-- 4 -->
+<p>تتسلل الكلمات بيننا كنسيمٍ لطيف يحمل معه رسائل أمل. لا تهمل الأصوات الصغيرة التي تأتي من داخلك، فهي التي تحدد مسار خطواتك. الحياة مليئة بالمفاجآت، وقد تجد في تفاصيلها الصغيرة سعادة لا تُقدر بثمن.</p>
+<select class="select-task2" data-answer="همسات الحياة">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="نبض المستقبل">نبض المستقبل</option>
+  <option value="ظلال الأحلام">ظلال الأحلام</option>
+  <option value="همسات الحياة">همسات الحياة</option>
+  <option value="سَرْبُ الأماني">سَرْبُ الأماني</option>
+  <option value="رحلة بلا نهاية">رحلة بلا نهاية</option>
+  <option value="بوابة الفرص">بوابة الفرص</option>
+  <option value="ألحان الصمت">ألحان الصمت</option>
+  <option value="صدى الماضي">صدى الماضي</option>
+  <option value="رسالة من بعيد">رسالة من بعيد</option>
+  <option value="ضوء في الظلام">ضوء في الظلام</option>
+</select>
+
+<!-- 5 -->
+<p>عندما يشتد الظلام، يظهر النور في أبسط الأشياء. قد يكون ابتسامة شخص غريب، أو كلمة طيبة في وقت الحاجة. لا تفقد الأمل مهما كانت الظروف، فالنور داخلنا دائمًا حاضر ينتظر اللحظة المناسبة ليظهر.</p>
+<select class="select-task2" data-answer="ضوء في الظلام">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="رسالة من بعيد">رسالة من بعيد</option>
+  <option value="ظلال الأحلام">ظلال الأحلام</option>
+  <option value="ضوء في الظلام">ضوء في الظلام</option>
+  <option value="نبض المستقبل">نبض المستقبل</option>
+  <option value="صدى الماضي">صدى الماضي</option>
+  <option value="ألحان الصمت">ألحان الصمت</option>
+  <option value="سَرْبُ الأماني">سَرْبُ الأماني</option>
+  <option value="همسات الحياة">همسات الحياة</option>
+  <option value="رحلة بلا نهاية">رحلة بلا نهاية</option>
+  <option value="بوابة الفرص">بوابة الفرص</option>
+</select>
+
+<!-- 6 -->
+<p>تصلنا أحيانًا رسائل تحمل بين سطورها مشاعر لم نكن ننتظرها. قد تكون كلمات تشفي جرحًا قديمًا أو تفتح صفحة جديدة في حياتنا. لا تتجاهل تلك الرسائل، فهي تذكير بأننا لسنا وحدنا وأن هناك دائمًا من يفكر فينا.</p>
+<select class="select-task2" data-answer="رسالة من بعيد">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="صدى الماضي">صدى الماضي</option>
+  <option value="ظلال الأحلام">ظلال الأحلام</option>
+  <option value="رسالة من بعيد">رسالة من بعيد</option>
+  <option value="سَرْبُ الأماني">سَرْبُ الأماني</option>
+  <option value="ضوء في الظلام">ضوء في الظلام</option>
+  <option value="ألحان الصمت">ألحان الصمت</option>
+  <option value="نبض المستقبل">نبض المستقبل</option>
+  <option value="بوابة الفرص">بوابة الفرص</option>
+  <option value="رحلة بلا نهاية">رحلة بلا نهاية</option>
+  <option value="همسات الحياة">همسات الحياة</option>
+</select>
+
+<!-- 7 -->
+<p>تعود الذكريات أحيانًا كصدى بعيد، تحفزنا على إعادة التفكير في قراراتنا. قد نجد فيها دروسًا وعبرًا تساعدنا على المضي قدمًا بحكمة. الماضي جزء لا يتجزأ من حاضرنا، فلا تنكره بل تعلم منه واستفد.</p>
+<select class="select-task2" data-answer="صدى الماضي">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="نبض المستقبل">نبض المستقبل</option>
+  <option value="ظلال الأحلام">ظلال الأحلام</option>
+  <option value="صدى الماضي">صدى الماضي</option>
+  <option value="سَرْبُ الأماني">سَرْبُ الأماني</option>
+  <option value="رسالة من بعيد">رسالة من بعيد</option>
+  <option value="ضوء في الظلام">ضوء في الظلام</option>
+  <option value="ألحان الصمت">ألحان الصمت</option>
+  <option value="همسات الحياة">همسات الحياة</option>
+  <option value="رحلة بلا نهاية">رحلة بلا نهاية</option>
+  <option value="بوابة الفرص">بوابة الفرص</option>
+</select>
+
+<!-- 8 -->
+<p>المستقبل ينتظر من يحلم ويخطط ويسعى لتحقيق أهدافه. لا تترك الفرصة تفوتك، وابدأ اليوم ببناء غدٍ أفضل. بالعمل والاجتهاد يمكن تحقيق كل ما نصبو إليه، فالثقة بالنفس هي مفتاح النجاح.</p>
+<select class="select-task2" data-answer="نبض المستقبل">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="صدى الماضي">صدى الماضي</option>
+  <option value="ظلال الأحلام">ظلال الأحلام</option>
+  <option value="نبض المستقبل">نبض المستقبل</option>
+  <option value="سَرْبُ الأماني">سَرْبُ الأماني</option>
+  <option value="رسالة من بعيد">رسالة من بعيد</option>
+  <option value="ضوء في الظلام">ضوء في الظلام</option>
+  <option value="ألحان الصمت">ألحان الصمت</option>
+  <option value="همسات الحياة">همسات الحياة</option>
+  <option value="رحلة بلا نهاية">رحلة بلا نهاية</option>
+  <option value="بوابة الفرص">بوابة الفرص</option>
+</select>
+    </div>
+  </div>
+
+  <!-- 3-topshiriq -->
+<div id="task3" class="task-container">
+  <h2 class="text-xl font-bold mb-2">3-topshiriq: Abzatslarga sarlavha tanlang</h2>
+  <div class="mb-2 text-sm text-gray-700">(2ta ortiqcha sarlavha bor)</div>
+  <div id="task3-titles" class="mb-4 flex flex-wrap"></div>
+  <div class="space-y-6">
+    <!-- 1 -->
+<p>النجاح في الحياة ليس صدفة، بل هو نتيجة جهد مستمر وعمل دؤوب. يجب على الإنسان أن يضع أهدافًا واضحة ويسعى لتحقيقها بكل عزم وإصرار. لا ينجح من ينتظر الحظ فقط، بل من يعمل بجد ويستغل كل فرصة تأتي في طريقه. التحديات والصعوبات جزء طبيعي من طريق النجاح، ويجب مواجهتها بثقة وصبر.</p>
+<select class="select-task2" data-answer="النّجاح في الحياَة">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="التعلم المستمر والتطوير الذاتي">التعلم المستمر والتطوير الذاتي</option>
+  <option value="العمل الجماعي والتعاون">العمل الجماعي والتعاون</option>
+  <option value="أهمية التخطيط والهدف">أهمية التخطيط والهدف</option>
+  <option value="الثقة بالنفس ودورها في النجاح">الثقة بالنفس ودورها في النجاح</option>
+  <option value="التوازن بين الحياة والعمل">التوازن بين الحياة والعمل</option>
+  <option value="النّجاح في الحياَة">النّجاح في الحياَة</option>
+  <option value="الصبر والمثابرة">الصبر والمثابرة</option>
+  <option value="مواجهة الفشل والتحديات">مواجهة الفشل والتحديات</option>
+</select>
+
+<!-- 2 -->
+<p>التخطيط هو المفتاح لتحقيق الإنجازات. عندما يكون لدينا هدف محدد وواضح، يصبح من السهل رسم خطة منظمة للوصول إليه. التخطيط يساعد على تنظيم الوقت وتحديد الأولويات، ويجعل العمل أكثر فاعلية. الإنسان الناجح هو الذي يعرف كيف يخطط ويعدل خططه حسب الظروف المختلفة دون أن يفقد حماسه.</p>
+<select class="select-task2" data-answer="أهمية التخطيط والهدف">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="التعلم المستمر والتطوير الذاتي">التعلم المستمر والتطوير الذاتي</option>
+  <option value="أهمية التخطيط والهدف">أهمية التخطيط والهدف</option>
+  <option value="الثقة بالنفس ودورها في النجاح">الثقة بالنفس ودورها في النجاح</option>
+  <option value="التوازن بين الحياة والعمل">التوازن بين الحياة والعمل</option>
+  <option value="العمل الجماعي والتعاون">العمل الجماعي والتعاون</option>
+  <option value="النّجاح في الحياَة">النّجاح في الحياَة</option>
+  <option value="الصبر والمثابرة">الصبر والمثابرة</option>
+  <option value="مواجهة الفشل والتحديات">مواجهة الفشل والتحديات</option>
+</select>
+
+<!-- 3 -->
+<p>الثقة بالنفس هي قوة داخلية تدفع الإنسان إلى مواجهة التحديات وتحقيق أحلامه. عندما يؤمن الإنسان بنفسه وبقدراته، يصبح قادرًا على تجاوز الخوف والشكوك التي تعيقه. تنمية الثقة بالنفس تتطلب ممارسة مستمرة، والتعلم من الأخطاء، وعدم الاستسلام للفشل.</p>
+<select class="select-task2" data-answer="الثقة بالنفس ودورها في النجاح">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="أهمية التخطيط والهدف">أهمية التخطيط والهدف</option>
+  <option value="الثقة بالنفس ودورها في النجاح">الثقة بالنفس ودورها في النجاح</option>
+  <option value="التوازن بين الحياة والعمل">التوازن بين الحياة والعمل</option>
+  <option value="التعلم المستمر والتطوير الذاتي">التعلم المستمر والتطوير الذاتي</option>
+  <option value="العمل الجماعي والتعاون">العمل الجماعي والتعاون</option>
+  <option value="النّجاح في الحياَة">النّجاح في الحياَة</option>
+  <option value="الصبر والمثابرة">الصبر والمثابرة</option>
+  <option value="مواجهة الفشل والتحديات">مواجهة الفشل والتحديات</option>
+</select>
+
+<!-- 4 -->
+<p>لا يمكن للإنسان أن يحقق النجاح الكبير بمفرده فقط، فالعمل الجماعي والتعاون مع الآخرين يسهلان تحقيق الأهداف. فرق العمل تجمع مهارات مختلفة وأفكار متعددة، مما يؤدي إلى نتائج أفضل. التعاون يعزز من روح الإبداع ويخلق بيئة محفزة للعمل والتطور.</p>
+<select class="select-task2" data-answer="العمل الجماعي والتعاون">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="الثقة بالنفس ودورها في النجاح">الثقة بالنفس ودورها في النجاح</option>
+  <option value="العمل الجماعي والتعاون">العمل الجماعي والتعاون</option>
+  <option value="النّجاح في الحياَة">النّجاح في الحياَة</option>
+  <option value="أهمية التخطيط والهدف">أهمية التخطيط والهدف</option>
+  <option value="التعلم المستمر والتطوير الذاتي">التعلم المستمر والتطوير الذاتي</option>
+  <option value="التوازن بين الحياة والعمل">التوازن بين الحياة والعمل</option>
+  <option value="الصبر والمثابرة">الصبر والمثابرة</option>
+  <option value="مواجهة الفشل والتحديات">مواجهة الفشل والتحديات</option>
+</select>
+
+<!-- 5 -->
+<p>في عالم متغير بسرعة، لا بد من مواكبة التطورات من خلال التعلم المستمر. السعي لاكتساب مهارات جديدة وتوسيع المعرفة يساعد الإنسان على البقاء في المنافسة وتحقيق النجاح الدائم. الاستثمار في النفس هو أفضل استثمار يمكن أن يقوم به الفرد.</p>
+<select class="select-task2" data-answer="التعلم المستمر والتطوير الذاتي">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="مواجهة الفشل والتحديات">مواجهة الفشل والتحديات</option>
+  <option value="التعلم المستمر والتطوير الذاتي">التعلم المستمر والتطوير الذاتي</option>
+  <option value="التوازن بين الحياة والعمل">التوازن بين الحياة والعمل</option>
+  <option value="العمل الجماعي والتعاون">العمل الجماعي والتعاون</option>
+  <option value="الصبر والمثابرة">الصبر والمثابرة</option>
+  <option value="الثقة بالنفس ودورها في النجاح">الثقة بالنفس ودورها في النجاح</option>
+  <option value="أهمية التخطيط والهدف">أهمية التخطيط والهدف</option>
+  <option value="النّجاح في الحياَة">النّجاح في الحياَة</option>
+</select>
+
+<!-- 6 -->
+<p>النجاح الحقيقي لا يقتصر فقط على العمل والإنجازات المهنية، بل يشمل التوازن بين الحياة الشخصية والعملية. الاهتمام بالصحة النفسية والجسدية، وقضاء الوقت مع الأسرة والأصدقاء، يساهم في تحقيق سعادة دائمة. الإنسان المتوازن يكون أكثر قدرة على الإنتاجية والنجاح المستدام.</p>
+<select class="select-task2" data-answer="التوازن بين الحياة والعمل">
+  <option disabled selected>Sarlavhani tanlang</option>
+  <option value="النّجاح في الحياَة">النّجاح في الحياَة</option>
+  <option value="التوازن بين الحياة والعمل">التوازن بين الحياة والعمل</option>
+  <option value="الصبر والمثابرة">الصبر والمثابرة</option>
+  <option value="أهمية التخطيط والهدف">أهمية التخطيط والهدف</option>
+  <option value="التعلم المستمر والتطوير الذاتي">التعلم المستمر والتطوير الذاتي</option>
+  <option value="مواجهة الفشل والتحديات">مواجهة الفشل والتحديات</option>
+  <option value="العمل الجماعي والتعاون">العمل الجماعي والتعاون</option>
+  <option value="الثقة بالنفس ودورها في النجاح">الثقة بالنفس ودورها في النجاح</option>
+</select>
+  </div>
+</div>
+
+<!-- 4-topshiriq -->
+<div id="task4" class="task-container">
+  <h2 class="text-xl font-bold mb-2">4-topshiriq: Matn asosida savollar</h2>
+  <p class="mb-4">يُعتبر نمط الحياة الصحي من أهم العوامل التي تؤثر بشكل مباشر على صحة الإنسان وجودة حياته. يشمل هذا النمط تناول الغذاء المتوازن، ممارسة الرياضة بانتظام، الحصول على قسط كافٍ من النوم، والابتعاد عن العادات الضارة مثل التدخين وتناول الكحول.
+
+الغذاء المتوازن يحتوي على جميع العناصر الغذائية التي يحتاجها الجسم من فيتامينات، معادن، بروتينات، وكربوهيدرات. تناول الفواكه والخضروات الطازجة يمد الجسم بالألياف والفيتامينات الضرورية التي تحفز الجهاز المناعي وتحافظ على صحة القلب. من المهم تقليل الأطعمة الدهنية والمقلية والمشروبات الغازية التي تؤدي إلى زيادة الوزن ومشاكل صحية أخرى.
+
+ممارسة الرياضة تساعد على تحسين اللياقة البدنية وتقوية العضلات. كما أنها تساهم في تحسين الحالة النفسية وتقليل التوتر والقلق. يمكن اختيار رياضة مناسبة لكل شخص مثل المشي، الجري، السباحة أو تمارين اليوغا. يجب أن تكون الرياضة جزءًا من الروتين اليومي للحفاظ على النشاط والحيوية.
+
+النوم الجيد يلعب دورًا أساسيًا في تجديد طاقة الجسم وتنظيم وظائفه. عدم الحصول على نوم كافٍ يؤثر سلبًا على التركيز والذاكرة ويزيد من خطر الإصابة بأمراض مزمنة مثل السكري وارتفاع ضغط الدم. ينصح بالنوم لمدة 7-8 ساعات يوميًا في بيئة هادئة ومظلمة.
+
+الابتعاد عن العادات الضارة أمر ضروري للحفاظ على الصحة. التدخين يسبب أمراضًا خطيرة مثل السرطان وأمراض القلب، وتناول الكحول بكثرة يؤدي إلى مشاكل في الكبد وتأثير سلبي على الدماغ. بالإضافة إلى ذلك، يجب الحد من التعرض للإجهاد النفسي عن طريق الاسترخاء وممارسة التأمل.
+
+باختصار، اتباع نمط حياة صحي يساعد الإنسان على العيش بسعادة وطاقة إيجابية، ويقلل من خطر الإصابة بالأمراض المزمنة ويطيل العمر. لذلك، من المهم أن نولي اهتمامًا خاصًا لعاداتنا اليومية ونحرص على تحسينها باستمرار.</p>
+  <div class="space-y-4">
+    <p>21. ما هو أهم مكون في الغذاء المتوازن؟</p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="الفواكه والخضروات"><option>الفواكه والخضروات</option><option>الأطعمة الدهنية</option><option>المشروبات الغازية</option></select>
+
+    <p>22. ما هي مدة النوم التي يُنصح بها يوميًا؟</p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="7-8 ساعات"><option>5-6 ساعات</option><option>7-8 ساعات</option><option>9-10 ساعات</option></select>
+
+    <p>23. أي من العادات التالية تعتبر ضارة بالصحة؟</p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="التدخين"><option>ممارسة الرياضة</option><option>التدخين</option><option>تناول الفواكه</option></select>
+
+    <p>24. ما هي فائدة ممارسة الرياضة بانتظام؟</p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="تقوية العضلات وتحسين المزاج"><option>زيادة الوزن</option><option>التسبب في التوتر</option><option>تقوية العضلات وتحسين المزاج</option></select>
+
+    <p>25. تناول المشروبات الغازية مفيد لصحة القلب.</p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="خطأ"><option>صحيح</option><option>خطأ</option><option>غير معطى</option></select>
+
+    <p>26. يمكن ممارسة اليوغا كنوع من أنواع الرياضة للحفاظ على الصحة.</p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="صحيح"><option>صحيح</option><option>خطأ</option><option>غير معطى</option></select>
+
+    <p>27. النوم لا يؤثر على التركيز والذاكرة.</p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="خطأ"><option>صحيح</option><option>خطأ</option><option>غير معطى</option></select>
+
+    <p>28. تناول الكحول بكثرة يؤدي إلى مشاكل في الكبد.</p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="صحيح"><option>صحيح</option><option>خطأ</option><option>غير معطى</option></select>
+
+    <p>29. التغذية السليمة لا تؤثر على الجهاز المناعي./p>
+    <select class="task4-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="خطأ"><option>صحيح</option><option>خطأ</option><option>غير معطى</option></select>
+  </div>
+</div>
+
+<!-- 5-topshiriq -->
+<div id="task5" class="task-container">
+  <h2 class="text-xl font-bold mb-2">5-topshiriq: Matnga asoslangan test savollari</h2>
+  <p class="mb-4"> في عصرٍ تتزاحم فيه الأصوات، وتتنافس فيه التطبيقات على انتباه الإنسان، أصبحت العزلة نوعًا من الترف المفقود. لم يعد بمقدور الكثيرين أن يجلسوا مع أنفسهم لدقائق معدودة دون أن يغرقوا في بحر الإشعارات والتنبيهات التي لا تنتهي. الهاتف الذكي الذي يُفترض أن يكون وسيلة للراحة، تحوّل إلى قيدٍ يمنع صاحبه من الاستمتاع بلحظة هدوء حقيقية.
+
+العزلة، في معناها الإيجابي، لا تعني الهروب من الناس، بل هي العودة إلى الذات، إلى أعماق الروح، حيث يتأمل الإنسان أفكاره، ويعيد ترتيب مشاعره، ويفهم دوافعه الحقيقية بعيدًا عن ضجيج العالم الخارجي. إنها فرصة لإعادة التوازن، وإعادة شحن الطاقة النفسية التي تستهلكها الحياة اليومية بكل ما فيها من ضغوط وتوترات.
+
+لقد أصبحنا نخاف من الفراغ، نخشى من الصمت، نظن أن عدم وجود صوت أو حركة يعني أن هناك خطأ ما. ولهذا، فإن كثيرًا من الناس يلجؤون إلى شغل كل لحظة من يومهم بمشاهدة مقاطع الفيديو، أو تصفح مواقع التواصل الاجتماعي، أو الرد على الرسائل، حتى في أكثر الأوقات التي يفترض أن تكون للراحة.
+
+لكن السؤال المهم هو: هل هذه الحياة المتصلة دائمًا تجعلنا أكثر سعادة؟ أم أنها تُدخلنا في دوامة لا نهاية لها من المقارنات، والشعور بالنقص، وفقدان المعنى؟ لا شك أن التكنولوجيا قد سهّلت علينا الكثير من الأمور، لكنها في الوقت نفسه سلبتنا أشياء لا تُقدّر بثمن، مثل لحظات التأمل، وأحاديث النفس، والقدرة على الاستماع للطبيعة من حولنا.
+
+لقد باتت العودة إلى العزلة الواعية ضرورة نفسية وروحية، وليست مجرد رفاهية. فالجلوس في مكان هادئ، بعيدًا عن الأجهزة، ولو لنصف ساعة في اليوم، يمكن أن يُحدث فرقًا هائلًا في مزاج الإنسان، وفي طريقة تفكيره. إن العقل البشري يحتاج إلى الصمت مثلما يحتاج الجسم إلى النوم. ففي لحظات السكون تُولد الأفكار العميقة، وتظهر الحلول التي غابت وسط الزحام.
+
+ومن هنا، فإننا بحاجة إلى إعادة تعريف مفهوم "العزلة"، وتعليمه للأجيال الجديدة، التي لم تعرف من الحياة إلا سرعة الإنترنت، وتعدد المهام، والتواصل الدائم. علينا أن نُرشد أبناءنا إلى أن الراحة لا تكون فقط في اللعب أو الترفيه، بل في القدرة على الجلوس مع الذات دون ملل، ودون الحاجة للهروب من الصمت.
+
+العزلة ليست ضعفًا، وليست دليلًا على الانطواء، بل هي حكمة من يعرف أن النفس تحتاج إلى وقت خاص بها، تمامًا كما تحتاج الأجسام إلى طعام وشراب. فهل نملك الشجاعة لنختار العزلة في زمنٍ يُمجّد فيه الظهور الدائم؟
+
+</p>
+  <div class="space-y-4">
+    <p>30. ما المقصود الإيجابي بالعزلة كما ورد في النص؟</p>
+    <select class="task5-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="الرجوع إلى الذات والتأمل الداخلي "><option>الابتعاد الكامل عن المجتمع</option><option>الرجوع إلى الذات والتأمل الداخلي </option><option>الانعزال بسبب مشكلات نفسية
+
+</option></select>
+
+    <p>31. ما الذي أصبح يمنع الناس من الاستمتاع بالهدوء الحقيقي؟</p>
+    <select class="task5-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="C. الهاتف الذكي والإشعارات المستمرة"><option>قلة الأماكن الهادئة</option><option>العمل لساعات طويلة</option><option>الهاتف الذكي والإشعارات المستمرة</option></select>
+
+    <p>32. كيف أثرت التكنولوجيا على الإنسان بحسب النص؟</p>
+    <select class="task5-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="سهّلت الحياة وسلبت لحظات التأمل"><option>سهّلت الحياة وسلبت لحظات التأمل</option><option>جعلت حياته أكثر راحة فقط</option><option>وفرت له العزلة والطمأنينة</option></select>
+
+    <p>33. ما سبب لجوء الناس إلى شغل كل لحظة من يومهم؟</p>
+    <select class="task5-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="لأنهم يخشون الصمت والفراغ"><option>لأنهم يبحثون عن المعرفة دائمًا</option><option>لأنهم يخشون الصمت والفراغ</option><option>لأن الإنترنت مجاني للجميع</option></select>
+
+    <p>34. ما الذي يحتاجه العقل البشري بحسب الكاتب؟</p>
+    <select class="task5-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="الصمت مثلما يحتاج الجسم إلى النوم"><option>كثرة المعلومات والتواصل</option><option>الصمت مثلما يحتاج الجسم إلى النوم</option><option>الحركة المستمرة</option></select>
+
+    <p>35. كيف يرى الكاتب العزلة في العصر الحديث؟</p>
+    <select class="task5-q block w-full md:w-2/3 border rounded p-2 min-h-[50px]" data-answer="ضرورة نفسية وروحية في زمن الظهور الدائم"><option>دليل على الضعف والانطواء</option><option>حالة اجتماعية طارئة</option><option>ضرورة نفسية وروحية في زمن الظهور الدائم</option></select>
+  </div>
+    <button onclick="checkResult()" class="mt-6 bg-green-600 text-white px-4 py-2 rounded">Tekshirish</button>
+    <div id="result" class="mt-4 font-bold text-lg"></div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="flex justify-between mt-8">
+    <button onclick="prevTask()" class="bg-gray-400 text-white px-4 py-2 rounded">Orqaga</button>
+    <button onclick="nextTask()" class="bg-blue-600 text-white px-4 py-2 rounded">Keyingi</button>
+  </div>
+
+ <!-- JS -->
+  <script>
+    let time = 60 * 60;
+    const timeEl = document.getElementById("time");
+    const interval = setInterval(() => {
+      if (time <= 0) {
+        clearInterval(interval);
+        checkResult(true);
+        disableAllInputs();
+        return;
+      }
+      time--;
+      const min = String(Math.floor(time / 60)).padStart(2, '0');
+      const sec = String(time % 60).padStart(2, '0');
+      timeEl.textContent = `${min}:${sec}`;
+    }, 1000);
+
+    let currentTask = 1;
+    function showTask(n) {
+      document.querySelectorAll('.task-container').forEach(t => t.classList.remove('active'));
+      document.getElementById(`task${n}`).classList.add('active');
+    }
+    function nextTask() {
+      if (currentTask < 5) currentTask++;
+      showTask(currentTask);
+    }
+    function prevTask() {
+      if (currentTask > 1) currentTask--;
+      showTask(currentTask);
+    }
+
+    const words = ["إن", "تقوم", "وقتا", "في", "تبدأ", "يقوم", "على", "هي"].sort();
+
+    document.getElementById("task1-words").innerHTML = words.map(w => `<div class="box-word" onclick="selectWord(this)">${w}</div>`).join('');
+    
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('.drop-zone').forEach(zone => {
+        zone.addEventListener('click', () => {
+          if (selected) {
+            zone.textContent = selected.textContent;
+            selected.classList.remove('selected');
+            selected = null;
+          }
+        });
+      });
+    });
+
+    const selectedWords = document.getElementById("task1-words");
+    let selected = null;
+    function selectWord(el) {
+      if (selected) selected.classList.remove('selected');
+      selected = el;
+      selected.classList.add('selected');
+    }
+
+    document.querySelectorAll('.select-task2').forEach(select => {
+      headlines.forEach(h => {
+        const option = document.createElement('option');
+        option.textContent = h;
+        option.value = h;
+        select.appendChild(option);
+      });
+    });
+
+    document.querySelectorAll('.select-task3').forEach(select => {
+      titles.forEach(t => {
+        const option = document.createElement('option');
+        option.textContent = t;
+        option.value = t;
+        select.appendChild(option);
+      });
+    });
+
+    function checkResult(fromTimer = false) {
+      let correct = 0;
+      // Task 1
+      document.querySelectorAll(".drop-zone").forEach(el => {
+        if (el.textContent.trim() === el.dataset.answer) correct++;
+      });
+      // Task 2
+      document.querySelectorAll(".task2-q").forEach(el => {
+        if (el.value === el.dataset.answer) correct++;
+      });
+      // Task 3
+      document.querySelectorAll(".task3-q").forEach(el => {
+        if (el.value === el.dataset.answer) correct++;
+      });
+      // Task 4
+      document.querySelectorAll(".task4-q").forEach(el => {
+        if (el.value === el.dataset.answer) correct++;
+      });
+      // Task 5
+      document.querySelectorAll(".task5-q").forEach(el => {
+        if (el.value === el.dataset.answer) correct++;
+      });
+
+      document.getElementById("result").textContent =
+        `Siz ${correct} ta savolga to‘g‘ri javob berdingiz.` +
+        (fromTimer ? " (Vaqt tugadi)" : "");
+    }
+
+    function disableAllInputs() {
+      document.querySelectorAll("select").forEach(el => el.disabled = true);
+      document.querySelectorAll(".box-word").forEach(el => el.style.pointerEvents = "none");
+      document.querySelectorAll(".drop-zone").forEach(el => el.style.pointerEvents = "none");
+    }
+  </script>
+</body>
+</html>
